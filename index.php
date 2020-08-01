@@ -30,4 +30,28 @@
 	while ($res = $stmt->fetch(PDO::FETCH_ASSOC)) {
 		echo 'Post number: '.$res['post_id'].': title: '.$res['title'].'<br>';
 	}
+
+	/******************************/
+	//Insert data to DB
+	//На основании именнованных параметров
+
+	$title = 'I have an appartment';
+	$cat_id = '1';
+	$content = 'Wonderfull appartment for rent at Marina Roscha close to city center';
+	$user_id = '1';
+
+	$insertQuery = "INSERT INTO posts (title, cat_id, content, user_id) VALUE(:title, :cat_id, :content, :user_id)";
+	$stmt = $conn->prepare($insertQuery);
+	$stmt->execute(['title' => $title, 'cat_id' => $cat_id, 'content' => $content, 'user_id' => $user_id]);
+
+	if ($insertQuery) {
+		echo 'Succefull insert';
+	} else {
+		echo 'Something went wrong';
+	}
+
+
+
+
+
 ?>
